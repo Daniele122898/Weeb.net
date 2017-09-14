@@ -25,7 +25,7 @@ namespace Weeb.net
         /// Get an array of available tags
         /// </summary>
         /// <param name="hidden">If it is only visible for the creator of weeb.sh</param>
-        /// <returns></returns>
+        /// <returns>All types</returns>
         public async Task<TypesData> GetTypesAsync(bool hidden = false)
         {
             return await _weebHttp.GetTypes(hidden);
@@ -35,7 +35,7 @@ namespace Weeb.net
         /// Get an array of available tags
         /// </summary>
         /// <param name="hidden">If it is only visible for the creator of weeb.sh</param>
-        /// <returns></returns>
+        /// <returns>All tags</returns>
         public async Task<TagsData> GetTagsAsync(bool hidden = false)
         {
             return await _weebHttp.GetTags(hidden);
@@ -48,7 +48,7 @@ namespace Weeb.net
         /// <param name="tags">tags the image should contain</param>
         /// <param name="hidden">Only visible to the creator of weeb.sh</param>
         /// <param name="nsfw">Is nsfw</param>
-        /// <returns>Random image</returns>
+        /// <returns>Random image or null if none found</returns>
         public async Task<RandomData> GetRandomAsync(string type, IEnumerable<string> tags, bool hidden = false, bool nsfw = false)
         {
             string finalTags = "";

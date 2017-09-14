@@ -44,13 +44,29 @@ namespace Weeb.net
 
         internal async Task<TypesData> GetTypes(bool hidden)
         {
-            var result = await _client.GetStringAsync(Endpoints.Types+$"?hidden={hidden}");
+            string result;
+            try
+            {
+                result = await _client.GetStringAsync(Endpoints.Types+$"?hidden={hidden}");
+            }
+            catch (HttpRequestException)
+            {
+                return null;
+            }
             return JsonConvert.DeserializeObject<TypesData>(result);
         }
 
         internal async Task<TagsData> GetTags(bool hidden)
         {
-            var result = await _client.GetStringAsync(Endpoints.Tags+$"?hidden={hidden}");
+            string result;
+            try
+            {
+                result = await _client.GetStringAsync(Endpoints.Tags+$"?hidden={hidden}");
+            }
+            catch (HttpRequestException)
+            {
+                return null;
+            }
             return JsonConvert.DeserializeObject<TagsData>(result);
         }
 
@@ -61,11 +77,18 @@ namespace Weeb.net
                 query += $"&type={type}";
             if (!string.IsNullOrWhiteSpace(tags))
                 query += $"&tags={tags}";
-            query += $"&hidden={hidden}&nsfw={nsfw}";
-            query = query.Substring(1, query.Length);
+            query += $"&hidden={hidden.ToString().ToLower()}&nsfw={nsfw.ToString().ToLower()}";
+            query = query.Substring(1);
             query = "?" + query;
-
-            var result = await _client.GetStringAsync(Endpoints.Random + query);
+            string result;
+            try
+            {
+                result = await _client.GetStringAsync(Endpoints.Random + query);
+            }
+            catch (HttpRequestException)
+            {
+                return null;
+            }
             return JsonConvert.DeserializeObject<RandomData>(result);
         }
     }
