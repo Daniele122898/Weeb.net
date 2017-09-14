@@ -1,4 +1,3 @@
-[![NuGet](https://img.shields.io/nuget/vpre/Weeb.net.svg?maxAge=2592000?style=plastic)](https://www.nuget.org/packages/Weeb.net/)
 <hr/>
 <h1 align="center">
 	Weeb.net
@@ -15,7 +14,7 @@
     </a>
 </p>
 <hr/>
-
+[![NuGet](https://img.shields.io/nuget/vpre/Weeb.net.svg?maxAge=2592000?style=plastic)](https://www.nuget.org/packages/Weeb.net/)
 # Installation
 ## Nuget
 Frequently updated on Nuget. Versioning follows Semver. 
@@ -24,3 +23,19 @@ Frequently updated on Nuget. Versioning follows Semver.
 ### Dependencies
 - .NETStandard 2.0
 - [Newtonsoft.Json (>=10.0.3)](https://www.nuget.org/packages/Newtonsoft.Json/)
+
+# Usage
+### Creating a client and Authentication
+Example: 
+```csharp
+//...
+	WeebClient weebClient = new WeebClient();
+	string token = "YOUR TOKEN";
+	
+	public async Task InitializeAsync()
+	{
+		//Will print current weeb.sh API version and Weeb.net wrapper version
+		await weebClient.Authenticate(token);
+	}
+
+```

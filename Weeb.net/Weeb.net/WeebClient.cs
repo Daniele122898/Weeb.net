@@ -9,7 +9,7 @@ namespace Weeb.net
     public class WeebClient
     {
         private WeebHttp _weebHttp;
-        internal const string WeebNetVersion = "1.0.0";
+        internal const string WeebNetVersion = "1.0.1";
 
         //https://docs.weeb.sh/
         
@@ -17,7 +17,7 @@ namespace Weeb.net
         /// Authenticate the client to the Api with your token. This step must be done before attempting to use the api!
         /// </summary>
         /// <param name="token"></param>
-        public async void Authenticate(string token)
+        public async Task Authenticate(string token)
         {
             _weebHttp = new WeebHttp(token);
             var welcome = await _weebHttp.Welcome();
