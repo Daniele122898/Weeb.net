@@ -44,8 +44,29 @@ namespace Weeb.net
 
         internal async Task<TypesData> GetTypes(bool hidden)
         {
-            var result = await _client.GetStringAsync(Endpoints.Types);
+            var result = await _client.GetStringAsync(Endpoints.Types+$"?hidden={hidden}");
             return JsonConvert.DeserializeObject<TypesData>(result);
+        }
+
+        internal async Task<TagsData> GetTags(bool hidden)
+        {
+            var result = await _client.GetStringAsync(Endpoints.Tags+$"?hidden={hidden}");
+            return JsonConvert.DeserializeObject<TagsData>(result);
+        }
+
+        internal async Task<RandomData> GetRandomImage(string type, string tags, bool hidden, bool nsfw)
+        {
+            string query = "";
+            if (!string.IsNullOrWhiteSpace(type))
+                query += $"&type={type}";
+            if (!string.IsNullOrWhiteSpace(tags))
+                query += $"&tags={tags}";
+            query += $"&hidden={hidden}&nsfw={nsfw}";
+            query = query.Substring(1, query.Length);
+            query = "?" + query;
+
+            var result = await _client.GetStringAsync(Endpoints.Random + query);
+            return JsonConvert.DeserializeObject<RandomData>(result);
         }
     }
 }
