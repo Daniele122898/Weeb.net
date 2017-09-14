@@ -25,7 +25,7 @@ Frequently updated on Nuget. Versioning follows Semver.
 - [Newtonsoft.Json (>=10.0.3)](https://www.nuget.org/packages/Newtonsoft.Json/)
 
 # Usage
-### Creating a client and Authentication
+### Creating a client and authentication
 Example: 
 ```csharp
 //...
@@ -37,5 +37,87 @@ Example:
 		//Will print current weeb.sh API version and Weeb.net wrapper version
 		await weebClient.Authenticate(token);
 	}
+//...
+```
 
+### Getting all available tags
+```csharp
+//...
+	public async Task<TagsData> GetTagsAsync(bool hidden)
+	{
+		return await weebClient.GetTagsAsync(hidden); //hidden is always defaulted to false
+	}
+//...
+```
+
+### Getting all available types
+```csharp
+//...
+	public async Task<TypesData> GetTypesAsync(bool hidden)
+	{
+		return await weebClient.GetTypesAsync(hidden); //hidden is always defaulted to false
+	}
+//...
+```
+
+### Getting Random image with type and or tags
+You must have at least either type or tags!
+```csharp
+//...
+	public async Task<RandomData> GetTypesAsync(string type, IEnumerable<string> tags ,bool hidden, bool nsfw)
+	{
+		var result = await weebClient.GetRandomAsync(type, tags, hidden, nsfw); //hidden and nsfw are always defaulted to false
+
+		if (result == null)
+		{
+			//Nothing was found do smth...
+			//...
+			return null
+		}
+		return result
+	}
+//...
+```
+
+## Models
+### TagsData
+```csharp
+    public class TagsData
+    {
+        internal string Status { get; set; } //cannot be used in your program. only used for internal wrapper things :P
+        public List<string> Tags { get; set; }
+    }
+
+```
+
+### TypesData
+```csharp
+    public class TypesData    
+    {
+        internal string Status { get; set; } //cannot be used in your program. only used for internal wrapper things :P
+        public List<string> Types { get; set; }
+    }
+```
+
+### RandomData
+```csharp
+	public class RandomData
+    {
+        public string Id { get; set; }
+        public string BaseType { get; set; }
+        public string FileType { get; set; }
+        public string MimeType { get; set; }
+        public string Account { get; set; }
+        public bool Hidden { get; set; }
+        public bool Nsfw { get; set; }
+        public List<Tags> Tags { get; set; }
+        public string Url { get; set; }
+    }
+
+    public class Tags
+    {
+        public string Name { get; set; }
+        public bool Hidden { get; set; }
+        public string User { get; set; }
+    }
 ```
