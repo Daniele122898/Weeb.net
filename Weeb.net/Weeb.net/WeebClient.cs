@@ -9,10 +9,14 @@ namespace Weeb.net
     public class WeebClient
     {
         private WeebHttp _weebHttp;
-        internal const string WeebNetVersion = "1.0.0-alpha.1";
+        internal const string WeebNetVersion = "1.0.0";
 
         //https://docs.weeb.sh/
         
+        /// <summary>
+        /// Authenticate the client to the Api with your token. This step must be done before attempting to use the api!
+        /// </summary>
+        /// <param name="token"></param>
         public async void Authenticate(string token)
         {
             _weebHttp = new WeebHttp(token);
@@ -25,7 +29,7 @@ namespace Weeb.net
         /// Get an array of available tags
         /// </summary>
         /// <param name="hidden">If it is only visible for the creator of weeb.sh</param>
-        /// <returns>All types</returns>
+        /// <returns>All types, null if authentication fails</returns>
         public async Task<TypesData> GetTypesAsync(bool hidden = false)
         {
             return await _weebHttp.GetTypes(hidden);
@@ -35,7 +39,7 @@ namespace Weeb.net
         /// Get an array of available tags
         /// </summary>
         /// <param name="hidden">If it is only visible for the creator of weeb.sh</param>
-        /// <returns>All tags</returns>
+        /// <returns>All tags, null if authentication fails</returns>
         public async Task<TagsData> GetTagsAsync(bool hidden = false)
         {
             return await _weebHttp.GetTags(hidden);
@@ -48,7 +52,7 @@ namespace Weeb.net
         /// <param name="tags">tags the image should contain</param>
         /// <param name="hidden">Only visible to the creator of weeb.sh</param>
         /// <param name="nsfw">Is nsfw</param>
-        /// <returns>Random image or null if none found</returns>
+        /// <returns>Random image or null if none found or authentication fails</returns>
         public async Task<RandomData> GetRandomAsync(string type, IEnumerable<string> tags, bool hidden = false, bool nsfw = false)
         {
             string finalTags = "";
