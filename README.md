@@ -5,9 +5,8 @@
 <p align="center">
     A fast and easy to use weeb.sh API wrapper.
     <br>
-	Originally build with Discord bots in mind like <a href='https://github.com/Daniele122898/SoraBot-v2'>Sora-v2</a>
+	Originally build with Discord bots in mind like <a href='https://github.com/Daniele122898/SoraBot-v2'>Sora-v2</a>! Join his Discord Server for support on the wrapper.
 	<br>
-	Join his Discord Server for support on the wrapper.
 	<br>
     <a href="https://discord.gg/Pah4yj5">
         <img src="https://discordapp.com/api/guilds/281589163659362305/widget.png?style=banner2">
