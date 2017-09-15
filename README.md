@@ -29,7 +29,6 @@ Frequently updated on Nuget. Versioning follows Semver.
 
 # Usage
 ### Creating a client and authentication
-Example: 
 ```csharp
 //...
 	WeebClient weebClient = new WeebClient();
