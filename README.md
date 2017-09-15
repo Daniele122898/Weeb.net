@@ -14,7 +14,9 @@
     </a>
 </p>
 <hr/>
+
 [![NuGet](https://img.shields.io/nuget/vpre/Weeb.net.svg?maxAge=2592000?style=plastic)](https://www.nuget.org/packages/Weeb.net/)
+
 # Installation
 ## Nuget
 Frequently updated on Nuget. Versioning follows Semver. 
