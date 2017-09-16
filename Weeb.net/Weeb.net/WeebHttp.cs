@@ -7,6 +7,22 @@ using Weeb.net.Data;
 
 namespace Weeb.net
 {
+    
+    public enum FileType
+    {
+        Jpg,
+        Png,
+        Gif,
+        Any
+    };
+
+    public enum NsfwSearch
+    {
+        False,
+        True,
+        Only
+    }
+    
     internal class WeebHttp
     {
         private const string BaseUrl = "https://api.weeb.sh/";
@@ -39,7 +55,6 @@ namespace Weeb.net
             var result = await _client.GetStringAsync(Endpoints.Images);
             //convert from json to usable c# objects
             return JsonConvert.DeserializeObject<WelcomeData>(result);
-            
         }
 
         internal async Task<TypesData> GetTypes(bool hidden)
@@ -70,14 +85,60 @@ namespace Weeb.net
             return JsonConvert.DeserializeObject<TagsData>(result);
         }
 
-        internal async Task<RandomData> GetRandomImage(string type, string tags, bool hidden, bool nsfw)
+        internal string GetNsfwOption(NsfwSearch search)
+        {
+            string nsfw = "";
+            switch (search)
+            {
+                case NsfwSearch.False:
+                    nsfw = "false";
+                    break;
+                case NsfwSearch.True:
+                    nsfw = "true";
+                    break;
+                case NsfwSearch.Only:
+                    nsfw = "only";
+                    break;
+            }
+            return nsfw;
+        }
+
+        internal string GetFiletypeExtension(FileType type)
+        {
+            string fileExtension = "";
+            switch (type)
+            {
+                case FileType.Gif:
+                    fileExtension = "gif";
+                    break;
+                case FileType.Jpg:
+                    fileExtension = "jpg";
+                    break;
+                case FileType.Png:
+                    fileExtension = "png";
+                    break;
+                    default:
+                        fileExtension = null;
+                        break;
+            }
+            return fileExtension;
+        }
+
+        internal async Task<RandomData> GetRandomImage(string type, string tags, bool hidden, NsfwSearch nsfw, FileType fileType)
         {
             string query = "";
             if (!string.IsNullOrWhiteSpace(type))
                 query += $"&type={type}";
             if (!string.IsNullOrWhiteSpace(tags))
                 query += $"&tags={tags}";
-            query += $"&hidden={hidden.ToString().ToLower()}&nsfw={nsfw.ToString().ToLower()}";
+            string nsfwS = GetNsfwOption(nsfw);
+            query += $"&hidden={hidden.ToString().ToLower()}&nsfw={nsfwS}";
+            if (fileType != FileType.Any)
+            {
+                string fileExtension = GetFiletypeExtension(fileType);
+                if (!string.IsNullOrWhiteSpace(fileExtension))
+                    query += $"&filetype={fileExtension}";
+            }
             query = query.Substring(1);
             query = "?" + query;
             string result;

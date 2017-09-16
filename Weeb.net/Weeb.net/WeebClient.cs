@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using Weeb.net.Data;
 
 namespace Weeb.net
-{
+{   
     public class WeebClient
     {
         private WeebHttp _weebHttp;
-        internal const string WeebNetVersion = "1.0.1";
+        internal const string WeebNetVersion = "1.0.3";
 
         //https://docs.weeb.sh/
         
@@ -50,10 +50,11 @@ namespace Weeb.net
         /// </summary>
         /// <param name="type">type of image</param>
         /// <param name="tags">tags the image should contain</param>
+        /// <param name="fileType">Specify which filetpye you want. Default to Any</param>
         /// <param name="hidden">Only visible to the creator of weeb.sh</param>
         /// <param name="nsfw">Is nsfw</param>
         /// <returns>Random image or null if none found or authentication fails</returns>
-        public async Task<RandomData> GetRandomAsync(string type, IEnumerable<string> tags, bool hidden = false, bool nsfw = false)
+        public async Task<RandomData> GetRandomAsync(string type, IEnumerable<string> tags, FileType fileType = FileType.Any, bool hidden = false, NsfwSearch nsfw = NsfwSearch.False)
         {
             string finalTags = "";
             foreach (var tag in tags)
@@ -67,7 +68,7 @@ namespace Weeb.net
             //Need at least type or tags
             if (string.IsNullOrWhiteSpace(type) && string.IsNullOrWhiteSpace(finalTags))
                 return null;
-            return await _weebHttp.GetRandomImage(type, finalTags, hidden, nsfw);
+            return await _weebHttp.GetRandomImage(type, finalTags, hidden, nsfw, fileType);
         }
     }
 }
