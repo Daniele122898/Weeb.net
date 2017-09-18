@@ -64,11 +64,14 @@ Frequently updated on Nuget. Versioning follows Semver.
 
 ### Getting Random image with type and or tags
 You must have at least either type or tags!
+**UPDATE:** There have been som minor changes to accomodate new features. 
+fileType consists of: `Jpg, png, gif, any`. Jpg and jpeg are treated as equal. 
+NsfwSearch consists of: `false, ture, only`
 ```csharp
 //...
-	public async Task<RandomData> GetTypesAsync(string type, IEnumerable<string> tags ,bool hidden, bool nsfw)
+	public async Task<RandomData> GetTypesAsync(string type, IEnumerable<string> tags,FileType fileType, NsfwSearch nsfw,bool hidden)
 	{
-		var result = await weebClient.GetRandomAsync(type, tags, hidden, nsfw); //hidden and nsfw are always defaulted to false
+		var result = await weebClient.GetRandomAsync(type, tags, fileType, hidden, nsfw); //hidden and nsfw are always defaulted to false
 
 		if (result == null)
 		{
