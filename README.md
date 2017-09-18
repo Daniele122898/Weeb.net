@@ -63,9 +63,9 @@ Frequently updated on Nuget. Versioning follows Semver.
 ```
 
 ### Getting Random image with type and or tags
-You must have at least either type or tags!
-**UPDATE:** There have been som minor changes to accomodate new features. 
-fileType consists of: `Jpg, png, gif, any`. Jpg and jpeg are treated as equal. 
+You must have at least either type or tags!    
+**UPDATE:** There have been som minor changes to accomodate new features.    
+fileType consists of: `Jpg, png, gif, any`. Jpg and jpeg are treated as equal.    
 NsfwSearch consists of: `false, ture, only`
 ```csharp
 //...
