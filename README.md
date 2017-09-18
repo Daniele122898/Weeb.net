@@ -27,6 +27,9 @@ Frequently updated on Nuget. Versioning follows Semver.
 - .NETStandard 2.0
 - [Newtonsoft.Json (>=10.0.3)](https://www.nuget.org/packages/Newtonsoft.Json/)
 
+### Token
+To use the weeb.sh services you need an authentication token. You can request one at devs@weeb.sh
+
 # Usage
 ### Creating a client and authentication
 ```csharp
