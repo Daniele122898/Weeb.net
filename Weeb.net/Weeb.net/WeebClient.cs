@@ -56,15 +56,8 @@ namespace Weeb.net
         /// <returns>Random image or null if none found or authentication fails</returns>
         public async Task<RandomData> GetRandomAsync(string type, IEnumerable<string> tags, FileType fileType = FileType.Any, bool hidden = false, NsfwSearch nsfw = NsfwSearch.False)
         {
-            string finalTags = "";
-            foreach (var tag in tags)
-            {
-                finalTags += $"{tag},";
-            }
-            if (!string.IsNullOrWhiteSpace(finalTags))
-            {
-                finalTags = finalTags.Remove(finalTags.Length - 1);
-            }
+            string finalTags = string.Join(",",tags);
+           
             //Need at least type or tags
             if (string.IsNullOrWhiteSpace(type) && string.IsNullOrWhiteSpace(finalTags))
                 return null;
