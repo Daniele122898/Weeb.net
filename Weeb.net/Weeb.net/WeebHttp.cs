@@ -22,6 +22,12 @@ namespace Weeb.net
         True,
         Only
     }
+
+    public enum TokenType
+    {
+        Bearer,
+        Wolke
+    }
     
     internal class WeebHttp
     {
@@ -33,7 +39,7 @@ namespace Weeb.net
         /// Initialize the Weeb.api wrapper using your API token
         /// </summary>
         /// <param name="token">Your weeb api token</param>
-        public WeebHttp(string token)
+        public WeebHttp(string token, TokenType type)
         {
             _token = token;
             HttpClientHandler handler = new HttpClientHandler()
@@ -46,7 +52,17 @@ namespace Weeb.net
             };
             _client.DefaultRequestHeaders.Accept.Clear();
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            string tokenType ="Bearer";
+            switch (type)
+            {
+                    case TokenType.Bearer:
+                        tokenType = "Bearer";
+                        break;
+                    case TokenType.Wolke:
+                        tokenType = "Wolke";
+                        break;
+            }
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, token);
         }
 
         internal async Task<WelcomeData> Welcome()
