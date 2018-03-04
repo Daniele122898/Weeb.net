@@ -52,7 +52,7 @@ namespace Weeb.net
             };
             _client.DefaultRequestHeaders.Accept.Clear();
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string tokenType ="Bearer";
+            string tokenType ="Wolke";
             switch (type)
             {
                     case TokenType.Bearer:

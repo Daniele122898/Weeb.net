@@ -40,7 +40,7 @@ To use the weeb.sh services you need an authentication token. You can request on
 	public async Task InitializeAsync()
 	{
 		//Will print current weeb.sh API version and Weeb.net wrapper version
-		await weebClient.Authenticate(token);
+		await weebClient.Authenticate(token, TokenType.Bearer); //or TokenType.Wolke
 	}
 //...
 ```

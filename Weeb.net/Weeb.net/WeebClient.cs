@@ -14,7 +14,7 @@ namespace Weeb.net
         //https://docs.weeb.sh/
 
         /// <summary>
-        /// Authenticate the client to the Api with your token. This step must be done before attempting to use the api!
+        /// Authenticate the client to the Api with your token also choosing which Type of token to use. This step must be done before attempting to use the api!
         /// </summary>
         /// <param name="token">Your Token</param>
         /// <param name="type">Type of Token Bearer/Wolke</param>
