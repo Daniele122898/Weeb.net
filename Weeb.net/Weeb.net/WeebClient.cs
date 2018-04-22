@@ -9,7 +9,7 @@ namespace Weeb.net
     public class WeebClient
     {
         private WeebHttp _weebHttp;
-        internal const string WeebNetVersion = "1.0.4";
+        internal const string WeebNetVersion = "1.0.6";
 
         //https://docs.weeb.sh/
 

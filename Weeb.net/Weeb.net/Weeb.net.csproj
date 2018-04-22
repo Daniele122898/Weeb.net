@@ -3,7 +3,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>Weeb.net</PackageId>
     <Title>Weeb.net</Title>
-    <PackageVersion>1.0.3</PackageVersion>
+    <PackageVersion>1.0.6</PackageVersion>
     <Authors>Serenity</Authors>
     <Description>Fast and easy to use .net core wrapper for weeb.sh API by Wolke</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
