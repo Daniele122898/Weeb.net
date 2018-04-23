@@ -9,18 +9,32 @@ namespace Weeb.net
     public class WeebClient
     {
         private WeebHttp _weebHttp;
-        internal const string WeebNetVersion = "1.0.6";
+        private string _userAgent;
+        internal const string WeebNetVersion = "1.0.7";
+
+        public WeebClient(string BotName = null, string BotVersion = null){
+            //prevent spammy user-agents
+            if(string.IsNullOrWhiteSpace(BotName)|| (BotName.Length > 70 || BotVersion.Length > 20)){
+                _userAgent = $"Weeb.Net/{WeebNetVersion}";
+            } else {
+                if(string.IsNullOrWhiteSpace(BotVersion)){
+                    _userAgent = $"{BotName}/1.0.0";
+                } else {
+                    _userAgent = $"{BotName}/{BotVersion}";
+                }
+            }
+        }
 
         //https://docs.weeb.sh/
 
         /// <summary>
-        /// Authenticate the client to the Api with your token also choosing which Type of token to use. This step must be done before attempting to use the api!
+        /// Authenticate the client to the Api withrow shit at us like in GOTth your token also choosing which Type of token to use. This step must be done before attempting to use the api!
         /// </summary>
         /// <param name="token">Your Token</param>
         /// <param name="type">Type of Token Bearer/Wolke</param>
         public async Task Authenticate(string token, TokenType type)
         {
-            _weebHttp = new WeebHttp(token, type);
+            _weebHttp = new WeebHttp(token, type, _userAgent);
             var welcome = await _weebHttp.Welcome();
             Console.WriteLine($"Connected to Weeb Api version: {welcome.Version}\nUsing Weeb.net wrapper {WeebNetVersion}");
         }

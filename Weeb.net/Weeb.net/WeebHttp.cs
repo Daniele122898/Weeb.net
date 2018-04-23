@@ -39,7 +39,7 @@ namespace Weeb.net
         /// Initialize the Weeb.api wrapper using your API token
         /// </summary>
         /// <param name="token">Your weeb api token</param>
-        public WeebHttp(string token, TokenType type)
+        public WeebHttp(string token, TokenType type, string UserAgent)
         {
             _token = token;
             HttpClientHandler handler = new HttpClientHandler()
@@ -52,6 +52,7 @@ namespace Weeb.net
             };
             _client.DefaultRequestHeaders.Accept.Clear();
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            _client.DefaultRequestHeaders.Add("User-Agent", UserAgent);
             string tokenType ="Wolke";
             switch (type)
             {
