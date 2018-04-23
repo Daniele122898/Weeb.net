@@ -27,14 +27,15 @@ Frequently updated on Nuget. Versioning follows Semver.
 - .NETStandard 2.0
 - [Newtonsoft.Json (>=11.0.1)](https://www.nuget.org/packages/Newtonsoft.Json/)
 
-### Token
+# Token
 To use the weeb.sh services you need an authentication token. You can request one at devs@weeb.sh
 
 # Usage
 ### Creating a client and authentication
 ```csharp
 //...
-	WeebClient weebClient = new WeebClient();
+	// For example "Sora", "1.0.0". These can be ommited and will default to Weeb.net and its version.
+	WeebClient weebClient = new WeebClient("YourBotName", "YourBotVersion");
 	string token = "YOUR TOKEN";
 	
 	public async Task InitializeAsync()
